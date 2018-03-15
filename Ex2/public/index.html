@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Ex2</title>
+
+    <script
+            src="https://code.jquery.com/jquery-3.3.1.js"
+            integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
+            crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue-resource"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="stylesheets/style.css">
+</head>
+<body>
+
+    <div class="container">
+        <h1 class="text-center">Web service excercise!</h1>
+        <div class="row student-info">
+            <p>Name: Vũ Đăng Tú</p>
+            <p>MSSV: 1414514</p>
+        </div>
+        <h2>Ex2: caculate distance between two point using simple RestAPI</h2>
+
+        <div id="app">
+            <h3>Input data here:</h3>
+            <div class="row">
+                <div class="col-md-3"><label>Lat1</label>: <input v-model="lat1" type="text" placeholder="Point 1"></div>
+                <div class="col-md-3"><label >longg1</label>: <input v-model="long1"type="text" placeholder="Point 1"></div>
+                <div class="col-md-3"><label >Lat2</label>: <input v-model="lat2" type="text" placeholder="Point 2"></div>
+                <div class="col-md-3"><label >longg2</label>: <input v-model="long2" type="text" placeholder="Point 2"></div>
+            </div>
+            <div class="row" style="margin-top: 30px">
+                <h3>Distance automatically shown here: <span class="text-danger">{{distance}} {{data}}</span></h3>
+            </div>
+        </div>
+    </div>
+
+
+<script>
+    new Vue({
+        el:'#app',
+        data: {
+            lat1:0.0,
+            lat2:0.0,
+            long1:0.0,
+            long2:0.0,
+            data: ''
+        },
+        computed:{
+            distance: function () {
+                if(!this.lat1 || !this.lat2 || !this.long1 || !this.long2) {
+                    this.data = 'caculating...';
+                    return;
+                }
+                this.$http.get(`distance?lat1=${this.lat1}&lat2=${this.lat2}&long1=${this.long1}&long2=${this.long2}`).then(response => {
+                    this.data = response.body.data;
+                    return;
+                }, response => {
+                    return this.data = 'error';
+                });
+            }
+        }
+    })
+</script>
+</body>
+</html>

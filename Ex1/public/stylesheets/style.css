@@ -1,0 +1,11 @@
+
+.student-info {
+  height: 100px;
+  width: 200px;
+  border: 1px dashed black;
+  padding: 15px;
+}
+
+.caculate-result {
+  margin-top: 30px;
+}
