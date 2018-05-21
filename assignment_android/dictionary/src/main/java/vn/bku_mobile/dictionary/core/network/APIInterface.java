@@ -8,6 +8,7 @@ import retrofit2.http.Path;
 import retrofit2.http.Query;
 import vn.bku_mobile.dictionary.objectJson.DictionaryData;
 import vn.bku_mobile.dictionary.objectJson.PostGoogleTranslate;
+import vn.bku_mobile.dictionary.objectJson.TranslatedDataContent;
 import vn.bku_mobile.dictionary.objectJson.WordData;
 
 public interface APIInterface {
@@ -16,10 +17,11 @@ public interface APIInterface {
     Call<DictionaryData> getDictionData();
 
     //Google Translate
-    @POST("/language/translate/v2")
-    Call<PostGoogleTranslate> postInputText(
-            @Body PostGoogleTranslate rawData,
-            @Query("key") String key
+    @POST("/api/v1.5/tr.json/translate")
+    Call<TranslatedDataContent> postInputText(
+            @Query("key") String key,
+            @Query("text") String input,
+            @Query("lang") String languageDirection
     );
     //Dictionary word details
     @GET("/word/getDetail/{id}")
