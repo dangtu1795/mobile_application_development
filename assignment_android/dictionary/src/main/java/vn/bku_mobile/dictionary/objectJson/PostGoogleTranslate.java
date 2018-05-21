@@ -5,63 +5,32 @@ import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
 
-public class PostGoogleTranslate {
-    @SerializedName("q")
-    @Expose
-    private String inputText;
-    @SerializedName("source")
-    @Expose
-    private String sourceLanguage;
-    @SerializedName("target")
-    @Expose
-    private String targetLanguage;
-    @SerializedName("format")
-    @Expose
-    private String format;
-    @SerializedName("data")
-    @Expose
-    private TranslatedDataContent translation;
+import vn.bku_mobile.dictionary.core.network.APIConstants;
 
-    public PostGoogleTranslate(String inputText, String sourceLanguage, String targetLanguage){
-        this.inputText=inputText;
-        this.sourceLanguage=sourceLanguage;
-        this.targetLanguage=targetLanguage;
-        this.format="text";
+public class PostGoogleTranslate {
+    private String inputText;
+    private String translateDirection;
+
+    public PostGoogleTranslate(String inputText, String translateDirection) {
+        this.inputText = inputText;
+        this.translateDirection = translateDirection;
     }
 
-    public String getInputText(){
+    public String getInputText() {
         return this.inputText;
     }
-    public void setInputText(String input){
-        this.inputText=input;
-    }
-    public String getSourceLanguage(){
-        return this.sourceLanguage;
 
-    }
-    public void setSourceLanguage(String sourceLanguage){
-        this.sourceLanguage=sourceLanguage;
-    }
-    public String getFormat() {
-        return format;
+    public void setInputText(String input) {
+        this.inputText = input;
     }
 
-    public void setFormat(String format) {
-        this.format = format;
+    public String gettranslateDirection() {
+        return this.translateDirection;
+
     }
 
-    public String getTargetLanguage(){
-        return this.targetLanguage;
-    }
-    public void setTargetLanguage(String targetLanguage){
-        this.targetLanguage=targetLanguage;
+    public void setSourceLanguage(String translateDirection) {
+        this.translateDirection = translateDirection;
     }
 
-    public TranslatedDataContent getTranslation(){
-        return this.translation;
-    }
-
-    public void setTranslation(TranslatedDataContent translation){
-        this.translation = translation;
-    }
 }
