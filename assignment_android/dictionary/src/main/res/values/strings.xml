@@ -1,0 +1,57 @@
+<resources>
+    <string name="app_name">BKU_dictionary</string>
+
+    <string name="nav_search">Search</string>
+    <string name="nav_translate">Translate</string>
+    <string name="nav_game">Games</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <!-- FlashSreen -->
+    <string name="flash_screen_search">Search</string>
+    <string name="flash_screen_google_trans">Google Translate</string>
+    <string name="flash_screen_minigame">Minigame</string>
+    <string name="title_activity_main2">Main2Activity</string>
+
+    <!-- Search Fragment -->
+    <string name="search_hint">Search</string>
+
+
+    <!-- Game Fragment -->
+    <string name="frag_game_title">Game</string>
+    <string name="frag_game_alert">Coming soon</string>
+
+    <!-- Google Translate -->
+    <string name="google_translate">Google Translate</string>
+    <string name="translate_from">Translate from</string>
+    <string name="translate_button_text">Translate</string>
+    <string name="to">To</string>
+    <string name="from">from</string>
+    <string name="vietnamese">Tieng Viet</string>
+    <string name="english">English</string>
+
+    <string-array name="google_translate_languages">
+        <item>Tieng Viet</item>
+        <item>English</item>
+    </string-array>
+
+    <!-- Favorite Activity -->
+    <string name="favorite_title">Favorite</string>
+
+    <!-- Facebook sdk -->
+    <string name="facebook_app_id">1380557402021250</string>
+    <!-- Game Activity -->
+    <string name="best_score">Best score</string>
+    <string name="game_name">WORD GAME</string>
+    <string name="game_start">Start</string>
+    <string name="high_score">High Score</string>
+    <string name="setting_title">Setting</string>
+
+    <!-- Game Content Activity -->
+    <string name="submit">Submit</string>
+    <string name="next">Next</string>
+    <string name="more_chance">More Chance</string>
+    <string name="end">End</string>
+
+</resources>
