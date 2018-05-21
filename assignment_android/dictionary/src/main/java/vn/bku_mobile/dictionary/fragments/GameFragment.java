@@ -40,7 +40,7 @@ public class GameFragment extends Fragment {
         gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
+				startActivity(new Intent(getActivity(), GameActivity.class));
             }
         });
         return view;

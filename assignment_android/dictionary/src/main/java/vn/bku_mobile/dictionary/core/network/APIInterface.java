@@ -28,4 +28,7 @@ public interface APIInterface {
     Call<WordData> getWordDetail(
             @Path("id") int id
     );
+	//Question for game
+    @GET("question/getallquestion")
+    Call<ListQuestionGame> getQuestionGame();
 }
