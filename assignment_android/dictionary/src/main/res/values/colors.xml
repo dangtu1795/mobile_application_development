@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#FF4081</color>
+    <color name="colorBorder">#75ffdbca</color>
+
+    <color name="shadowGray">#0dececec</color>
+    <color name="lightGray">#e9e9e9</color>
+    <color name="black">#131313</color>
+    <color name="white">#ffffff</color>
+    <color name="red">#e90808</color>
+    <color name="transparent">#00FFFFFF</color>
+
+    <color name="flashScreenLight">#3F51A0</color>
+    <color name="flashScreenMedium">#3F51B5</color>
+    <color name="flashScreenDark">#303F9F</color>
+
+    <!-- Search Bar -->
+    <color name="searchBarDark">#182C52</color>
+    <color name="searchBarLight">#304A9F</color>
+
+    <!-- 50 shades of Blue -->
+    <color name="dark_blue">#192D56</color>
+    <color name="lightBlue">#2F499D</color>
+    <!-- Word Detail -->
+    <color name="lightGreen">#5baf27</color>
+    <!--Game-->
+    <color name="gameNameLine">#F7DB70</color>
+    <color name="gameName">#010000</color>
+    <color name="gameContentBackground">#2A2A2A</color>
+    <color name="gameQuestion">#5A5A5A</color>
+    <color name="uncheckAnswer">#F2F2F2</color>
+    <color name="checkAnswer">#294187</color>
+    <color name="checkFalseAnswer">#D0011B</color>
+    <color name="checkTrueAnswer">#7ed320</color>
+</resources>
