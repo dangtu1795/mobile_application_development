@@ -7,6 +7,7 @@ import retrofit2.http.POST;
 import retrofit2.http.Path;
 import retrofit2.http.Query;
 import vn.bku_mobile.dictionary.objectJson.DictionaryData;
+import vn.bku_mobile.dictionary.objectJson.ListQuestionGame;
 import vn.bku_mobile.dictionary.objectJson.PostGoogleTranslate;
 import vn.bku_mobile.dictionary.objectJson.TranslatedDataContent;
 import vn.bku_mobile.dictionary.objectJson.WordData;

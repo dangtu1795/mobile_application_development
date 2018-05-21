@@ -12,6 +12,7 @@ import android.widget.AdapterView;
 import android.widget.GridView;
 
 import vn.bku_mobile.dictionary.R;
+import vn.bku_mobile.dictionary.activities.GameActivity;
 import vn.bku_mobile.dictionary.adapter.ImageAdapter;
 
 
