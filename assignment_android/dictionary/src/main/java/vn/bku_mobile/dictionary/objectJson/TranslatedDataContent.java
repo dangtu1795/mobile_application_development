@@ -5,20 +5,11 @@ import com.google.gson.annotations.SerializedName;
 import java.util.List;
 
 public class TranslatedDataContent {
-    @SerializedName("translations")
+    @SerializedName("text")
     @Expose
-    private List<TranslationContent> translated = null;
+    private List<String> translated = null;
 
-    public TranslationContent getTranslated() {
+    public String getTranslated() {
         return translated.get(0);
-    }
-
-    public void setTranslations(List<TranslationContent> translations) {
-        this.translated = translations;
-    }
-
-    public TranslatedDataContent withTranslations(List<TranslationContent> translations) {
-        this.translated = translations;
-        return this;
     }
 }
