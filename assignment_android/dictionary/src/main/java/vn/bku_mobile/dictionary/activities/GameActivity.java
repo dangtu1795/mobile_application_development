@@ -1,4 +1,4 @@
-package vn.techlove.dictionary.activities;
+package vn.bku_mobile.dictionary.activities;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -8,9 +8,9 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
-import vn.techlove.dictionary.R;
+import vn.bku_mobile.dictionary.R;
 
-import static vn.techlove.dictionary.core.constants.AppConstants.PREFERENCE_POINT;
+import static vn.bku_mobile.dictionary.core.constants.AppConstants.PREFERENCE_POINT;
 
 public class GameActivity extends AppCompatActivity {
 

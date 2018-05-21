@@ -1,4 +1,4 @@
-package vn.techlove.dictionary.activities;
+package vn.bku_mobile.dictionary.activities;
 
 import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
@@ -34,27 +34,27 @@ import java.util.ArrayList;
 import java.util.List;
 
 import retrofit2.Call;
-import vn.techlove.dictionary.R;
-import vn.techlove.dictionary.core.constants.AppConstants;
-import vn.techlove.dictionary.core.network.APIInterface;
-import vn.techlove.dictionary.core.network.RetrofitManager;
-import vn.techlove.dictionary.interfaces.ICallRetrofit;
-import vn.techlove.dictionary.interfaces.ModelResponse;
-import vn.techlove.dictionary.objectJson.ListQuestionGame;
-import vn.techlove.dictionary.objectJson.Question;
-import vn.techlove.dictionary.utils.GeneralUtils;
-import vn.techlove.dictionary.utils.MusicPlay;
+import vn.bku_mobile.dictionary.R;
+import vn.bku_mobile.dictionary.core.constants.AppConstants;
+import vn.bku_mobile.dictionary.core.network.APIInterface;
+import vn.bku_mobile.dictionary.core.network.RetrofitManager;
+import vn.bku_mobile.dictionary.interfaces.ICallRetrofit;
+import vn.bku_mobile.dictionary.interfaces.ModelResponse;
+import vn.bku_mobile.dictionary.objectJson.ListQuestionGame;
+import vn.bku_mobile.dictionary.objectJson.Question;
+import vn.bku_mobile.dictionary.utils.GeneralUtils;
+import vn.bku_mobile.dictionary.utils.MusicPlay;
 
-import static vn.techlove.dictionary.R.drawable.answer_detail_icon;
-import static vn.techlove.dictionary.R.drawable.check_border;
-import static vn.techlove.dictionary.activities.GameContentActivity.typeAnswer.A;
-import static vn.techlove.dictionary.activities.GameContentActivity.typeAnswer.B;
-import static vn.techlove.dictionary.activities.GameContentActivity.typeAnswer.C;
-import static vn.techlove.dictionary.activities.GameContentActivity.typeAnswer.D;
-import static vn.techlove.dictionary.activities.GameContentActivity.typeAnswer.E;
-import static vn.techlove.dictionary.core.constants.AppConstants.PREFERENCE_MUSIC;
-import static vn.techlove.dictionary.core.constants.AppConstants.PREFERENCE_POINT;
-import static vn.techlove.dictionary.core.network.APIConstants.BASE_URL;
+import static vn.bku_mobile.dictionary.R.drawable.answer_detail_icon;
+import static vn.bku_mobile.dictionary.R.drawable.check_border;
+import static vn.bku_mobile.dictionary.activities.GameContentActivity.typeAnswer.A;
+import static vn.bku_mobile.dictionary.activities.GameContentActivity.typeAnswer.B;
+import static vn.bku_mobile.dictionary.activities.GameContentActivity.typeAnswer.C;
+import static vn.bku_mobile.dictionary.activities.GameContentActivity.typeAnswer.D;
+import static vn.bku_mobile.dictionary.activities.GameContentActivity.typeAnswer.E;
+import static vn.bku_mobile.dictionary.core.constants.AppConstants.PREFERENCE_MUSIC;
+import static vn.bku_mobile.dictionary.core.constants.AppConstants.PREFERENCE_POINT;
+import static vn.bku_mobile.dictionary.core.network.APIConstants.BASE_URL;
 
 @SuppressLint("SetTextI18n")
 public class GameContentActivity extends AppCompatActivity implements View.OnClickListener {

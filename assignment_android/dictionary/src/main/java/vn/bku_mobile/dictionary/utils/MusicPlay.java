@@ -1,4 +1,4 @@
-package vn.techlove.dictionary.utils;
+package vn.bku_mobile.dictionary.utils;
 
 import android.content.Context;
 import android.media.MediaPlayer;

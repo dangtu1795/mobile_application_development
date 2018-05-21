@@ -1,4 +1,4 @@
-package vn.techlove.dictionary.activities;
+package vn.bku_mobile.dictionary.activities;
 
 import android.content.SharedPreferences;
 import android.media.MediaPlayer;
@@ -8,11 +8,11 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Switch;
 
-import vn.techlove.dictionary.R;
-import vn.techlove.dictionary.utils.MusicPlay;
+import vn.bku_mobile.dictionary.R;
+import vn.bku_mobile.dictionary.utils.MusicPlay;
 
-import static vn.techlove.dictionary.core.constants.AppConstants.PREFERENCE_CHECK_MUSIC;
-import static vn.techlove.dictionary.core.constants.AppConstants.PREFERENCE_MUSIC;
+import static vn.bku_mobile.dictionary.core.constants.AppConstants.PREFERENCE_CHECK_MUSIC;
+import static vn.bku_mobile.dictionary.core.constants.AppConstants.PREFERENCE_MUSIC;
 
 public class GameSettingActivity extends AppCompatActivity implements View.OnClickListener {
     private SharedPreferences prefs;

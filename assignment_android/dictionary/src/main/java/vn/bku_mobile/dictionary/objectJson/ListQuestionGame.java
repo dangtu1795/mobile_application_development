@@ -1,4 +1,4 @@
-package vn.techlove.dictionary.objectJson;
+package vn.bku_mobile.dictionary.objectJson;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
