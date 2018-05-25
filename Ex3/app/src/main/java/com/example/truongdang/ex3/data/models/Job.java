@@ -1,9 +1,10 @@
-package com.example.truongdang.ex3.data;
+package com.example.truongdang.ex3.data.models;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Job {
+public class Job implements Serializable {
     private String name;
     private List<JobInfo> jobs = new ArrayList<>();
     private String handle;

@@ -1,13 +1,25 @@
 package com.example.truongdang.ex3.ui.main;
 
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
+import android.support.v4.view.ViewPager;
+import android.view.View;
+import android.widget.ImageView;
 
 import com.example.truongdang.ex3.R;
+import com.example.truongdang.ex3.adapter.PagerAdapter;
 import com.example.truongdang.ex3.base.BaseActivity;
+import com.example.truongdang.ex3.data.models.Job;
+import com.example.truongdang.ex3.interfaces.IAdapterDataCallback;
+import com.example.truongdang.ex3.utils.InstantiateUtils;
+import com.example.truongdang.ex3.utils.MenuManager;
 import com.example.truongdang.ex3.utils.Utils;
 
-public class MainActivity extends BaseActivity<MainPresenter> implements MainMvpView {
+import java.util.ArrayList;
+
+public class MainActivity extends BaseActivity<MainPresenter> implements MainMvpView, View.OnClickListener, IAdapterDataCallback {
+    private ArrayList<Job> jobList;
+    private PagerAdapter adapter;
+    private ViewPager pager;
+    private MenuManager menuManager;
 
     @Override
     protected int getLayoutResource() {
@@ -26,7 +38,39 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainMvp
 
     @Override
     protected void initialView() {
-        Utils.readJson(this);
+        showLoading();
+        jobList = new ArrayList<>(Utils.readJson(this));
 
+        pager = mainView.findViewById(R.id.pager);
+
+        ImageView menuBtn = (ImageView) mainView.findViewById(R.id.headerLeftBtn);
+        menuBtn.setImageResource(R.drawable.ic_menu);
+        menuBtn.setOnClickListener(this);
+
+        menuManager = new MenuManager(this, mainView, this);
+
+        pager.setAdapter(adapter = new PagerAdapter(getSupportFragmentManager(), InstantiateUtils.generateMenuFragments()));
+        pager.setOffscreenPageLimit(adapter.getCount() - 1);
+
+        hideLoading();
+    }
+
+    public ArrayList<Job> getJobList() {
+        return jobList;
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.headerLeftBtn: {
+                menuManager.openMenu();
+                break;
+            }
+        }
+    }
+
+    @Override
+    public void onItemClick(int position) {
+        pager.setCurrentItem(position);
     }
 }

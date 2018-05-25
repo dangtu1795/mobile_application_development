@@ -1,5 +1,8 @@
-package com.example.truongdang.ex3.data;
+package com.example.truongdang.ex3.data.models;
 
+import android.os.Parcelable;
+
+import java.io.Serializable;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -8,7 +11,7 @@ import java.util.Date;
 import java.util.List;
 
 
-public class JobInfo {
+public class JobInfo implements Serializable {
     private String name;
     private String company;
     private String salary;
@@ -21,9 +24,7 @@ public class JobInfo {
         try {
             dl = formate.parse(deadline);
             return dl;
-        }
-        catch(ParseException ex)
-        {
+        } catch (ParseException ex) {
             ex.printStackTrace();
         }
         return null;

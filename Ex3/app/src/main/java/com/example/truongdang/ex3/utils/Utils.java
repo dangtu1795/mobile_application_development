@@ -1,10 +1,9 @@
 package com.example.truongdang.ex3.utils;
 
 import android.content.Context;
-import android.util.Log;
+import android.net.ConnectivityManager;
 
-import com.example.truongdang.ex3.data.Job;
-import com.google.gson.Gson;
+import com.example.truongdang.ex3.data.models.Job;
 import com.google.gson.GsonBuilder;
 
 
@@ -33,5 +32,9 @@ public class Utils {
             ex.printStackTrace();
         }
         return null;
+    }
+
+    public static boolean isNetworkOnline(Context context) {
+        return ((ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE)).getActiveNetworkInfo() != null;
     }
 }

@@ -4,15 +4,15 @@ import android.app.Activity;
 import android.content.Context;
 import android.widget.Toast;
 
+import com.example.truongdang.ex3.R;
+import com.example.truongdang.ex3.data.network.RetrofitManager;
+import com.example.truongdang.ex3.interfaces.ITask;
+import com.example.truongdang.ex3.utils.KeyboardUtils;
+import com.example.truongdang.ex3.utils.Utils;
+
 import io.reactivex.Observable;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
-import vn.quankundeptrai.mvpcore.R;
-import vn.quankundeptrai.mvpcore.data.network.RetrofitManager;
-import vn.quankundeptrai.mvpcore.interfaces.ITask;
-import vn.quankundeptrai.mvpcore.utils.GeneralUtils;
-import vn.quankundeptrai.mvpcore.utils.KeyboardUtils;
-
 /**
  * Created by TQN on 1/19/2018.
  */
@@ -64,8 +64,8 @@ public class BasePresenter <T extends BaseMvpView> implements Presenter<T> {
     }
 
     private boolean isOnline() {
-        if (!GeneralUtils.isNetworkOnline(mContext)) {
-            Toast.makeText(mContext, mContext.getResources().getString(R.string.noNetwork), Toast.LENGTH_SHORT).show();
+        if (!Utils.isNetworkOnline(mContext)) {
+            Toast.makeText(mContext, "No Internet Connection", Toast.LENGTH_SHORT).show();
 //            ((BaseActivity) mContext).hideLoading();
             return false;
         }

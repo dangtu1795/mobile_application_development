@@ -1,5 +1,6 @@
 package com.example.truongdang.ex3.base;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
@@ -27,6 +28,7 @@ public abstract class BaseActivity<T extends BasePresenter> extends AppCompatAct
     private RelativeLayout mainContent;
     private T presenter;
     private IPermissionCallback permissionCallback;
+    private ProgressDialog ringProgressDialog;
 
 
     protected abstract int getLayoutResource();
@@ -147,5 +149,24 @@ public abstract class BaseActivity<T extends BasePresenter> extends AppCompatAct
 
     public void setPermissionCallback(IPermissionCallback permissionCallback) {
         this.permissionCallback = permissionCallback;
+    }
+
+    public void showLoading() {
+        showLoading(getString(R.string.loading_data));
+    }
+
+    public void showLoading(String msg) {
+        if (ringProgressDialog == null) {
+            ringProgressDialog = ProgressDialog.show(this, "", msg, true);
+            ringProgressDialog.setCancelable(false);
+            ringProgressDialog.setCanceledOnTouchOutside(false);
+        }
+    }
+
+    public void hideLoading() {
+        if (ringProgressDialog != null && ringProgressDialog.isShowing()) {
+            ringProgressDialog.dismiss();
+            ringProgressDialog = null;
+        }
     }
 }
