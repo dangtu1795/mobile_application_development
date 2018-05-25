@@ -1,6 +1,4 @@
-package com.example.truongdang.ex3;
-
-import android.util.Log;
+package com.example.truongdang.ex3.data;
 
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -10,12 +8,12 @@ import java.util.Date;
 import java.util.List;
 
 
-class JobInfo {
-    public String name;
-    public String company;
-    public String salary;
-    public String location;
-    public String deadline;
+public class JobInfo {
+    private String name;
+    private String company;
+    private String salary;
+    private String location;
+    private String deadline;
 
     public Date getDeadline() {
         DateFormat formate = new SimpleDateFormat("d/M/yyyy");
@@ -30,14 +28,20 @@ class JobInfo {
         }
         return null;
     }
-}
 
-class Job {
-    public String name;
-    public List<JobInfo> jobs = new ArrayList<>();
-    public String handle;
-}
+    public String getName() {
+        return name;
+    }
 
-public class Jobs {
-    public List<Job> joblist = new ArrayList<>();
+    public String getCompany() {
+        return company;
+    }
+
+    public String getSalary() {
+        return salary;
+    }
+
+    public String getLocation() {
+        return location;
+    }
 }

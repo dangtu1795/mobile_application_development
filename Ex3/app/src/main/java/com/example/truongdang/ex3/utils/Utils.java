@@ -1,8 +1,9 @@
-package com.example.truongdang.ex3;
+package com.example.truongdang.ex3.utils;
 
 import android.content.Context;
 import android.util.Log;
 
+import com.example.truongdang.ex3.data.Job;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
@@ -13,8 +14,7 @@ import java.util.Arrays;
 import java.util.List;
 
 public class Utils {
-    public static List<Job> ReadJson(Context context)
-    {
+    public static List<Job> readJson(Context context) {
         String json = null;
         try {
             InputStream is = context.getAssets().open("jobs.json");
@@ -28,16 +28,10 @@ public class Utils {
             is.close();
 
             json = new String(buffer, "UTF-8");
+            return Arrays.asList(new GsonBuilder().create().fromJson(json, Job[].class));
         } catch (IOException ex) {
             ex.printStackTrace();
         }
-        GsonBuilder builder = new GsonBuilder();
-        Gson gson = builder.create();
-
-        Job[] jobs = gson.fromJson(json, Job[].class);
-        List<Job> joblist = Arrays.asList(jobs);
-        Log.d("mess",joblist.get(0).jobs.get(0).deadline);
-        Log.d("mess",joblist.get(0).jobs.get(0).getDeadline().toString());
-        return joblist;
+        return null;
     }
 }
