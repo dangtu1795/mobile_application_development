@@ -13,23 +13,29 @@ import vn.bku_mobile.dictionary.R;
 import static vn.bku_mobile.dictionary.core.constants.AppConstants.PREFERENCE_POINT;
 
 public class GameActivity extends AppCompatActivity {
+    private TextView bestScoreTxt;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
+        bestScoreTxt = findViewById(R.id.tv_best_score);
         Button btn_Start = findViewById(R.id.btn_start_game);
         btn_Start.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getBaseContext(), GameContentActivity.class);
                 startActivity(intent);
-                finish();
             }
         });
-        SharedPreferences prefs = getSharedPreferences(PREFERENCE_POINT, MODE_PRIVATE);
-        int restoredPoint = prefs.getInt("point", 0);
-        ((TextView) findViewById(R.id.tv_best_score)).setText("" + restoredPoint);
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        SharedPreferences prefs = getSharedPreferences(PREFERENCE_POINT, MODE_PRIVATE);
+        int restoredPoint = prefs.getInt(PREFERENCE_POINT, 0);
+        bestScoreTxt.setText(String.valueOf(restoredPoint));
+
+    }
 }

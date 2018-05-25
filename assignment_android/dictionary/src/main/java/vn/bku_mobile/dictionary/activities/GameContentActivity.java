@@ -31,6 +31,8 @@ import android.widget.Toast;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 
 import retrofit2.Call;
@@ -65,7 +67,7 @@ public class GameContentActivity extends AppCompatActivity implements View.OnCli
     private RadioButton answer_B;
     private RadioButton answer_C;
     private RadioButton answer_D;
-    private RadioButton cur_radio;
+    private RadioButton cur_radio = null;
     Button modifyButton;
     private int point = 0;
     private TextView tv_point;
@@ -73,6 +75,7 @@ public class GameContentActivity extends AppCompatActivity implements View.OnCli
     private typeAnswer cur_answer = E;
     private countDown curCountDown;
     private ImageView img_question;
+    private Button cancelBtn;
 
     public enum typeAnswer {
         A, B, C, D, E
@@ -83,35 +86,40 @@ public class GameContentActivity extends AppCompatActivity implements View.OnCli
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game_content);
 
-        tv_point = findViewById(R.id.tv_point);
-        tv_time = findViewById(R.id.tv_count_down_time);
-        img_question = findViewById(R.id.image_question);
-        answer_A = findViewById(R.id.FirstRadio);
-        answer_B = findViewById(R.id.SecondRadio);
-        answer_C = findViewById(R.id.ThirdRadio);
-        answer_D = findViewById(R.id.FourthRadio);
-        modifyButton = findViewById(R.id.btn_modify_game);
+        if (!GeneralUtils.isNetworkOnline(this)) {
+            Toast.makeText(this, "No Internet Connection", Toast.LENGTH_SHORT)
+                    .show();
+            finish();
+        } else {
 
-        findViewById(R.id.btn_cancel_game).setOnClickListener(this);
-        findViewById(R.id.img_btn_setting).setOnClickListener(this);
-        modifyButton.setOnClickListener(this);
+            tv_point = findViewById(R.id.tv_point);
+            tv_time = findViewById(R.id.tv_count_down_time);
+            img_question = findViewById(R.id.image_question);
+            answer_A = findViewById(R.id.FirstRadio);
+            answer_B = findViewById(R.id.SecondRadio);
+            answer_C = findViewById(R.id.ThirdRadio);
+            answer_D = findViewById(R.id.FourthRadio);
+            modifyButton = findViewById(R.id.btn_modify_game);
 
-        tv_point.setText("POINT " + point);
+            (cancelBtn = findViewById(R.id.btn_cancel_game)).setOnClickListener(this);
+            findViewById(R.id.img_btn_setting).setOnClickListener(this);
+            modifyButton.setOnClickListener(this);
 
-        //Set Music
-        SharedPreferences prefs = getSharedPreferences(PREFERENCE_MUSIC, MODE_PRIVATE);
-        final Boolean restoredBoolean = prefs.getBoolean("check_music", false);
-        if (restoredBoolean) {
-            if (MusicPlay.player == null) {
-                MusicPlay.SoundPlayer(getBaseContext(), R.raw.nova);
-            } else {
-                MusicPlay.player.start();
+            tv_point.setText("POINT " + point);
+
+            //Set Music
+            SharedPreferences prefs = getSharedPreferences(PREFERENCE_MUSIC, MODE_PRIVATE);
+            final Boolean restoredBoolean = prefs.getBoolean("check_music", false);
+            if (restoredBoolean) {
+                if (MusicPlay.player == null) {
+                    MusicPlay.SoundPlayer(getBaseContext(), R.raw.nova);
+                } else {
+                    MusicPlay.player.start();
+                }
             }
-        }
 
-        ///Get Game data from server
-        final ProgressDialog mDialog = ProgressDialog.show(this, "", "Please wait", true);
-        if (GeneralUtils.isNetworkOnline(this)) {
+            ///Get Game data from server
+            final ProgressDialog mDialog = ProgressDialog.show(this, "", "Please wait", true);
             //Retrofit get question data
             RetrofitManager.getInstance().callApi(this, new ICallRetrofit<ListQuestionGame>() {
                 @Override
@@ -123,7 +131,7 @@ public class GameContentActivity extends AppCompatActivity implements View.OnCli
                 public void onSuccess(ListQuestionGame result) {
                     ListQuestionGame.setListQuestionGame(result);
                     list = result.getList_question();
-
+                    Collections.shuffle(list);
                     Picasso.with(GameContentActivity.this).load(BASE_URL + list.get(cur_question).getImage()).into(img_question);
 
                     answer_A.setText(list.get(cur_question).getA());
@@ -135,14 +143,7 @@ public class GameContentActivity extends AppCompatActivity implements View.OnCli
                     mDialog.dismiss();
                 }
             });
-
-        } else {
-            Toast.makeText(this, "No Internet Connection", Toast.LENGTH_SHORT)
-                    .show();
-            mDialog.dismiss();
-            finish();
         }
-
     }
 
 
@@ -182,11 +183,7 @@ public class GameContentActivity extends AppCompatActivity implements View.OnCli
 
     @Override
     public void onBackPressed() {
-        super.onBackPressed();
-        if (MusicPlay.player != null) {
-            MusicPlay.player.stop();
-            MusicPlay.player = null;
-        }
+        cancelBtn.performClick();
     }
 
     @Override
@@ -205,6 +202,7 @@ public class GameContentActivity extends AppCompatActivity implements View.OnCli
                                     MusicPlay.player.stop();
                                     MusicPlay.player = null;
                                 }
+                                updateScore();
                                 finish();
                             }
                         });
@@ -222,49 +220,53 @@ public class GameContentActivity extends AppCompatActivity implements View.OnCli
                 break;
             }
             case R.id.btn_modify_game: {
-
                 if (((Button) v).getText().equals("Submit")) {
                     //Show detail
-                    findViewById(R.id.btn_FirstRadio).setVisibility(View.VISIBLE);
-                    findViewById(R.id.btn_SecondRadio).setVisibility(View.VISIBLE);
-                    findViewById(R.id.btn_ThirdRadio).setVisibility(View.VISIBLE);
-                    findViewById(R.id.btn_FourthRadio).setVisibility(View.VISIBLE);
+                    if (cur_radio != null) {
 
-                    //Set unable for not checking radio button
-                    answer_A.setEnabled(false);
-                    answer_B.setEnabled(false);
-                    answer_C.setEnabled(false);
-                    answer_D.setEnabled(false);
-                    curCountDown.cancel();
+                        findViewById(R.id.btn_FirstRadio).setVisibility(View.VISIBLE);
+                        findViewById(R.id.btn_SecondRadio).setVisibility(View.VISIBLE);
+                        findViewById(R.id.btn_ThirdRadio).setVisibility(View.VISIBLE);
+                        findViewById(R.id.btn_FourthRadio).setVisibility(View.VISIBLE);
 
-                    if (getType(list.get(cur_question).getAnswer()) == cur_answer) { //Correct answer
-                        setBackgroundRadioButton(cur_radio, R.drawable.check_true_border, true);
-                        point += 1;
-                        ((Button) v).setText(R.string.next);
-                    } else { ///Wrong answer
-                        //Show the right answer
-                        switch (getType(list.get(cur_question).getAnswer())) {
-                            case A:
-                                setBackgroundRadioButton(answer_A, R.drawable.check_true_border, true);
-                                break;
-                            case B:
-                                setBackgroundRadioButton(answer_B, R.drawable.check_true_border, true);
-                                break;
-                            case C:
-                                setBackgroundRadioButton(answer_C, R.drawable.check_true_border, true);
-                                break;
-                            case D:
-                                setBackgroundRadioButton(answer_D, R.drawable.check_true_border, true);
-                                break;
+                        //Set unable for not checking radio button
+                        answer_A.setEnabled(false);
+                        answer_B.setEnabled(false);
+                        answer_C.setEnabled(false);
+                        answer_D.setEnabled(false);
+                        curCountDown.cancel();
+
+                        if (getType(list.get(cur_question).getAnswer()) == cur_answer) { //Correct answer
+                            setBackgroundRadioButton(cur_radio, R.drawable.check_true_border, true);
+                            point += 1;
+                            ((Button) v).setText(R.string.next);
+                        } else { ///Wrong answer
+                            //Show the right answer
+                            switch (getType(list.get(cur_question).getAnswer())) {
+                                case A:
+                                    setBackgroundRadioButton(answer_A, R.drawable.check_true_border, true);
+                                    break;
+                                case B:
+                                    setBackgroundRadioButton(answer_B, R.drawable.check_true_border, true);
+                                    break;
+                                case C:
+                                    setBackgroundRadioButton(answer_C, R.drawable.check_true_border, true);
+                                    break;
+                                case D:
+                                    setBackgroundRadioButton(answer_D, R.drawable.check_true_border, true);
+                                    break;
+                            }
+                            ((Button) v).setText(R.string.retry);
+
+                            //Show the wrong answer
+                            if (!cur_answer.equals(E))
+                                setBackgroundRadioButton(cur_radio, R.drawable.check_false_border, false);
                         }
-
-                        //Show the wrong answer
-                        if (!cur_answer.equals(E))
-                            setBackgroundRadioButton(cur_radio, R.drawable.check_false_border, false);
+                        //Update point
+                        tv_point.setText("POINT " + point);
                     }
-                    //Update point
-                    tv_point.setText("POINT " + point);
                 } else if (((Button) v).getText().equals("Next")) {
+                    cur_radio = null;
                     ((LinearLayout) answer_A.getParent()).clearAnimation();
                     ((LinearLayout) answer_B.getParent()).clearAnimation();
                     ((LinearLayout) answer_C.getParent()).clearAnimation();
@@ -309,16 +311,16 @@ public class GameContentActivity extends AppCompatActivity implements View.OnCli
                         ((Button) v).setText(R.string.end);
                     }
 
-                } else if (((Button) v).getText().equals("End")) {
+                } else if (((Button) v).getText().equals("Retry") || ((Button) v).getText().equals("End")) {
                     if (MusicPlay.player != null) {
                         MusicPlay.player.stop();
                         MusicPlay.player = null;
                     }
                     finish();
-
                 }
                 break;
             }
+
             case R.id.img_btn_setting: {
                 startActivity(new Intent(getBaseContext(), GameSettingActivity.class));
             }
@@ -398,6 +400,7 @@ public class GameContentActivity extends AppCompatActivity implements View.OnCli
         }
     }
 
+
     public void setBackgroundRadioButton(RadioButton rad, int idbackgournd, boolean haveAnimation) {
         ((LinearLayout) rad.getParent()).setBackground(ContextCompat.getDrawable(getBaseContext(), idbackgournd));
         if (haveAnimation) {
@@ -410,9 +413,7 @@ public class GameContentActivity extends AppCompatActivity implements View.OnCli
         }
     }
 
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
+    private void updateScore() {
         int point = Integer.parseInt(tv_point.getText().toString().split(" ").clone()[1]);
 
         SharedPreferences prefs = getSharedPreferences(PREFERENCE_POINT, MODE_PRIVATE);
