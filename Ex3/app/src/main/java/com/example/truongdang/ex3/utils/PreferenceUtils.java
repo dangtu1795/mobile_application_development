@@ -2,8 +2,17 @@ package com.example.truongdang.ex3.utils;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
 
 import com.example.truongdang.ex3.data.CoreManager;
+import com.example.truongdang.ex3.data.models.JobInfo;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+
+import java.lang.reflect.Type;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
 
 
 /**
@@ -11,7 +20,8 @@ import com.example.truongdang.ex3.data.CoreManager;
  */
 
 public class PreferenceUtils {
-    private static final String prefName = "sgstrawberry"; //Change to your app name later
+    private static final String prefName = "BKU_JOB_MARKET"; //Change to your app name later
+
     /**
      * Save specific string to SharedPreferences
      *
@@ -27,7 +37,12 @@ public class PreferenceUtils {
                 prefName, /* MODE_PRIVATE */0);
         SharedPreferences.Editor editor = pref.edit();
         editor.putString(key, value);
-        editor.commit();
+        editor.apply();
+    }
+
+
+    public static void saveFavoriteJobsPref(String key, ArrayList<JobInfo> value) {
+        saveFavoriteJobsPref(CoreManager.getInstance().getCurrentActivity(), key, value);
     }
 
     public static void saveStringPref(String key, String value) {
@@ -49,7 +64,7 @@ public class PreferenceUtils {
                 prefName, /* MODE_PRIVATE */0);
         SharedPreferences.Editor editor = pref.edit();
         editor.putInt(key, value);
-        editor.commit();
+        editor.apply();
     }
 
     public static void saveIntPref(String key, int value) {
@@ -71,7 +86,28 @@ public class PreferenceUtils {
                 prefName, /* MODE_PRIVATE */0);
         SharedPreferences.Editor editor = pref.edit();
         editor.putLong(key, value);
-        editor.commit();
+        editor.apply();
+    }
+
+    private static void saveFavoriteJobsPref(Context context, String key, ArrayList<JobInfo> value) {
+        if (context == null) {
+            return;
+        }
+        SharedPreferences pref = context.getSharedPreferences(
+                prefName, /* MODE_PRIVATE */0);
+        SharedPreferences.Editor editor = pref.edit();
+        editor.putString(key, new Gson().toJson(value));
+        editor.apply();
+    }
+
+    public static ArrayList<JobInfo> getFavoriteJobsPref(Context context, String key) {
+        SharedPreferences sharedPrefs = context.getSharedPreferences(prefName, /* MODE_PRIVATE */0);
+        Gson gson = new Gson();
+        String json = sharedPrefs.getString(key, null);
+
+        Type type = new TypeToken<ArrayList<JobInfo>>() {
+        }.getType();
+        return gson.fromJson(json, type);
     }
 
     public static void saveLongPref(String key, long value) {
@@ -86,7 +122,7 @@ public class PreferenceUtils {
                 prefName, /* MODE_PRIVATE */0);
         SharedPreferences.Editor editor = pref.edit();
         editor.putFloat(key, value);
-        editor.commit();
+        editor.apply();
     }
 
     public static void saveFloatPref(String key, float value) {
@@ -108,7 +144,7 @@ public class PreferenceUtils {
                 prefName, /* MODE_PRIVATE */0);
         SharedPreferences.Editor editor = pref.edit();
         editor.putBoolean(key, value);
-        editor.commit();
+        editor.apply();
     }
 
     public static void saveBoolPref(String key, boolean value) {
@@ -219,7 +255,7 @@ public class PreferenceUtils {
                 prefName, /* MODE_PRIVATE */0);
         SharedPreferences.Editor editor = pref.edit();
         editor.remove(key);
-        editor.commit();
+        editor.apply();
     }
 
     public static void removeItemFromPreference(String key) {
@@ -232,6 +268,7 @@ public class PreferenceUtils {
                 prefName, /* MODE_PRIVATE */0);
         SharedPreferences.Editor editor = pref.edit();
         editor.clear();
-        editor.commit();
+        editor.apply();
     }
+
 }

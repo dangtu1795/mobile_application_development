@@ -10,11 +10,14 @@ import com.example.truongdang.ex3.adapter.PagerAdapter;
 import com.example.truongdang.ex3.base.BaseActivity;
 import com.example.truongdang.ex3.data.models.Job;
 import com.example.truongdang.ex3.interfaces.IAdapterDataCallback;
+import com.example.truongdang.ex3.ui.menu.favoritejob.FavoriteJobFragment;
 import com.example.truongdang.ex3.utils.InstantiateUtils;
 import com.example.truongdang.ex3.utils.MenuManager;
 import com.example.truongdang.ex3.utils.Utils;
 
 import java.util.ArrayList;
+
+import static com.example.truongdang.ex3.data.constants.AppConstants.MENU_FAVORITE;
 
 public class MainActivity extends BaseActivity<MainPresenter> implements MainMvpView, View.OnClickListener, IAdapterDataCallback {
     private ArrayList<Job> jobList;
@@ -47,7 +50,7 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainMvp
         ImageView menuBtn = (ImageView) mainView.findViewById(R.id.headerLeftBtn);
         menuBtn.setImageResource(R.drawable.ic_menu);
         menuBtn.setOnClickListener(this);
-        ((TextView)mainView.findViewById(R.id.headerTitle)).setText("Job Market");
+        ((TextView) mainView.findViewById(R.id.headerTitle)).setText("Job Market");
         menuManager = new MenuManager(this, mainView, this);
 
         pager.setAdapter(adapter = new PagerAdapter(getSupportFragmentManager(), InstantiateUtils.generateMenuFragments()));
@@ -72,6 +75,11 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainMvp
 
     @Override
     public void onItemClick(int position) {
+        switch (position){
+            case MENU_FAVORITE: {
+                ((FavoriteJobFragment) adapter.getItem(MENU_FAVORITE)).updateJobList();
+            }
+        }
         pager.setCurrentItem(position);
     }
 }

@@ -9,4 +9,5 @@ public class ExtraKeys {
     public static final String JOB_TYPE_NAME = "JOB_TYPE";
     public static final String JOB_LIST = "JOB_LIST";
     public static final String JOB_DETAIL = "JOB_DETAIL";
+    public static final String FAVORITE = "FAVORITE";
 }

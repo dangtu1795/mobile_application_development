@@ -45,4 +45,16 @@ public class JobInfo implements Serializable {
     public String getLocation() {
         return location;
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == this) {
+            return true;
+        }
+        if (!(obj instanceof JobInfo)) {
+            return false;
+        }
+        JobInfo other = (JobInfo) obj;
+        return name.equals(other.getName()) && location.equals(other.getLocation()) && company.equals(other.getCompany()) && salary.equals(other.getSalary());
+    }
 }

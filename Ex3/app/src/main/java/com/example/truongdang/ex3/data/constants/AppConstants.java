@@ -6,4 +6,8 @@ package com.example.truongdang.ex3.data.constants;
 
 public class AppConstants{
     public static int API_TIMEOUT = 270;
+
+    public static int MENU_JOB_LIST = 0;
+    public static int MENU_JOB_SEARCH = 1;
+    public static final int MENU_FAVORITE = 2;
 }
