@@ -45,6 +45,7 @@ public class JobDetailActivity extends BaseActivity<JobDetailPresenter> implemen
 
         if (coreManager.getFavoriteJobs().contains(jobInfo)) {
             button.setText("Saved");
+            button.setTextColor(ContextCompat.getColor(this, R.color.buttonBlue));
             button.setBackground(getDrawable(R.drawable.white_button));
         }
     }
