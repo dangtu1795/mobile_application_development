@@ -85,6 +85,10 @@ public abstract class BaseActivity<T extends BasePresenter> extends AppCompatAct
         ((ImageView) mainView.findViewById(R.id.headerLeftBtn)).setImageResource(resourceId);
     }
 
+    protected void leftHeaderIconOnCLick() {
+
+    }
+
     private void hideHeader() {
         ((ViewGroup) findViewById(R.id.root)).removeView(findViewById(R.id.header));
         ((ViewGroup) findViewById(R.id.root)).removeView(findViewById(R.id.headerShadow));

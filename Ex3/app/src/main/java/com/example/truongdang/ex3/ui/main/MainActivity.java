@@ -3,6 +3,7 @@ package com.example.truongdang.ex3.ui.main;
 import android.support.v4.view.ViewPager;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.example.truongdang.ex3.R;
 import com.example.truongdang.ex3.adapter.PagerAdapter;
@@ -46,7 +47,7 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainMvp
         ImageView menuBtn = (ImageView) mainView.findViewById(R.id.headerLeftBtn);
         menuBtn.setImageResource(R.drawable.ic_menu);
         menuBtn.setOnClickListener(this);
-
+        ((TextView)mainView.findViewById(R.id.headerTitle)).setText("Job Market");
         menuManager = new MenuManager(this, mainView, this);
 
         pager.setAdapter(adapter = new PagerAdapter(getSupportFragmentManager(), InstantiateUtils.generateMenuFragments()));

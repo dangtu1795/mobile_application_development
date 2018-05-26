@@ -4,4 +4,9 @@
     <string name="salary">Lương: %s</string>
     <string name="location">Địa điểm: %s</string>
     <string name="error">Error</string>
+    <string name="searchResult">%d results for \'%s\':</string>
+    <array name="search_type">
+        <item>Job\'s Category</item>
+        <item>Job\'s Name</item>
+    </array>
 </resources>

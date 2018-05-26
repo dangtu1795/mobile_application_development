@@ -1,5 +1,6 @@
 package com.example.truongdang.ex3.ui.fulljoblist;
 
+import android.content.Intent;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
@@ -11,6 +12,7 @@ import com.example.truongdang.ex3.data.constants.ExtraKeys;
 import com.example.truongdang.ex3.data.models.Job;
 import com.example.truongdang.ex3.data.models.JobInfo;
 import com.example.truongdang.ex3.interfaces.IAdapterDataCallback;
+import com.example.truongdang.ex3.ui.jobdetail.JobDetailActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -51,6 +53,8 @@ public class FullJobListActivity extends BaseActivity<FullJobListPresenter> impl
 
     @Override
     public void onItemClick(int position) {
-
+        Intent intent = new Intent(this, JobDetailActivity.class);
+        intent.putExtra(ExtraKeys.JOB_DETAIL, adapter.getMainList().get(position));
+        startActivity(intent);
     }
 }
